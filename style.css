@@ -1,0 +1,440 @@
+/* General Styles */
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0; /* Remove body padding */
+}
+
+.container {
+    width: 100%; /* Use full width */
+    max-width: none; /* Override any max-width */
+    min-height: 100vh; /* Ensure container takes full viewport height */
+    margin: 0;
+    background: #fff;
+    padding: 15px; /* Add padding inside the container */
+    box-sizing: border-box; /* Include padding in width calculation */
+    display: flex;
+    flex-direction: column;
+}
+
+.header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 0 10px; /* Add some padding to header */
+    flex-shrink: 0; /* Prevent header from shrinking */
+    flex-wrap: wrap; /* Allow buttons to wrap */
+    gap: 10px; /* Space between buttons */
+}
+
+h1 {
+    margin: 0;
+    color: #333;
+    text-align: left;
+    margin-right: auto; /* Push other buttons to the right */
+}
+
+.header-buttons button {
+    padding: 8px 12px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+    white-space: nowrap; /* Prevent button text wrapping */
+    width: auto; /* Override general button width */
+    display: inline-block; /* Align buttons inline */
+    margin-left: 5px; /* Space buttons out */
+}
+
+.header-buttons button:hover {
+    background-color: #5a6268;
+}
+
+#addCardBtnGlobal {
+    background-color: #28a745;
+}
+#addCardBtnGlobal:hover {
+    background-color: #218838;
+}
+
+#sortPriorityBtn, #sortIdBtn {
+    background-color: #ffc107;
+    color: #333;
+}
+#sortPriorityBtn:hover, #sortIdBtn:hover {
+    background-color: #e0a800;
+}
+
+
+/* Import/Export Controls */
+.controls {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    gap: 20px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    overflow: hidden; /* Needed for smooth transition */
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out, margin-bottom 0.5s ease-out, border 0.5s ease-out;
+    background: #eee;
+    padding: 15px; /* Add padding when open */
+    border: 1px solid #ddd; /* Add border when open */
+    border-radius: 5px;
+    max-height: 500px; /* Adjust as needed, large enough for content */
+    flex-shrink: 0; /* Prevent controls from shrinking */
+    box-sizing: border-box;
+}
+
+.controls.collapsible.collapsed {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border: none; /* Hide border when collapsed */
+}
+
+
+.io-section {
+    flex: 1;
+    min-width: 300px; /* Minimum width for IO sections */
+}
+
+.io-section h2 {
+    margin-top: 0;
+    font-size: 1.1em;
+    color: #333;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    font-family: monospace;
+    font-size: 0.9em; /* Slightly smaller font */
+}
+
+/* General button style override */
+.io-section button, .modal-content form button[type="submit"] {
+    display: block; /* Ensure buttons take full width in their container */
+    width: 100%; /* Make buttons fill their section or form */
+    padding: 10px 15px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Add some space above buttons */
+    box-sizing: border-box;
+}
+.io-section button:hover, .modal-content form button[type="submit"]:hover {
+    background-color: #4cae4c;
+}
+
+#exportBtn {
+    background-color: #337ab7;
+}
+#exportBtn:hover {
+    background-color: #286090;
+}
+
+/* Kanban Board Styles */
+.kanban-board {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px; /* Spacing between columns */
+    flex-grow: 1; /* Allow board to fill remaining vertical space */
+    overflow-x: auto; /* Allow horizontal scroll if columns exceed width */
+}
+
+.kanban-column {
+    flex: 1; /* Each column tries to take equal width */
+    background-color: #e9e9e9;
+    border-radius: 5px;
+    padding: 10px;
+    min-width: 300px; /* Minimum width for columns */
+    display: flex; /* Use flexbox for column layout */
+    flex-direction: column; /* Stack title and cards vertically */
+    max-height: calc(100vh - 150px); /* Adjust based on header/controls height */
+}
+
+.kanban-column h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+    text-align: center;
+    color: #333;
+    flex-shrink: 0; /* Prevent title from shrinking */
+}
+
+.cards {
+    flex-grow: 1; /* Allow cards container to fill column space */
+    background-color: #f8f8f8;
+    padding: 10px;
+    border-radius: 4px;
+    overflow-y: auto; /* Allow vertical scrolling within the column */
+    min-height: 150px; /* Minimum height for drop zone */
+    transition: background-color 0.2s ease;
+}
+
+/* Kanban Card Styles */
+.kanban-card {
+    background-color: white;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    cursor: pointer; /* Change cursor to pointer for clickable card body */
+    border-left: 5px solid #007bff; /* Default border */
+    position: relative; /* For positioning edit button */
+    transition: box-shadow 0.2s ease;
+}
+.kanban-card:hover {
+     box-shadow: 0 3px 6px rgba(0,0,0,0.15); /* Slight lift on hover */
+}
+
+.kanban-card:last-child {
+    margin-bottom: 0;
+}
+
+/* Style based on priority */
+.kanban-card[data-priority="Critica"] { border-left-color: #dc3545; }
+.kanban-card[data-priority="Alta"] { border-left-color: #ffc107; }
+.kanban-card[data-priority="Media"] { border-left-color: #17a2b8; }
+.kanban-card[data-priority="Bassa"] { border-left-color: #28a745; }
+
+.kanban-card p, .kanban-card div:not(.card-meta) { /* Exclude card-meta from default margin */
+    margin: 4px 0;
+    font-size: 0.9em;
+    color: #555;
+}
+.kanban-card strong {
+    font-weight: bold;
+    color: #333;
+}
+.kanban-card .card-title {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    color: #333;
+    padding-right: 30px; /* Space for edit button */
+}
+.kanban-card .card-meta {
+    font-size: 0.85em;
+    color: #777;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    flex-wrap: wrap; /* Allow meta items to wrap */
+    gap: 5px 10px; /* Row and column gap */
+    border-top: 1px solid #eee; /* Separator line */
+    padding-top: 8px;
+}
+.kanban-card .card-meta span {
+    /* margin-right: 10px; Removed in favor of gap */
+}
+
+.kanban-card .card-details {
+    font-size: 0.85em;
+    color: #666;
+    margin-top: 8px;
+    max-height: 60px; /* Limit height of long text in card preview */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis */
+    /* Details are shown fully in the view modal */
+}
+.kanban-card .card-details pre { /* Style preformatted text preview */
+    white-space: pre-wrap; /* Allow wrapping */
+    word-wrap: break-word; /* Break long words */
+    font-size: 0.9em;
+    background-color: #f9f9f9;
+    padding: 3px 5px;
+    border-radius: 3px;
+    margin-top: 5px;
+    max-height: 40px; /* Limit preview height */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.kanban-card small.card-id {
+    display: block;
+    margin-top: 8px;
+    color: #999;
+    font-size: 0.75em;
+}
+
+.edit-card-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #eee;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px; /* Adjust size of pencil/icon */
+    line-height: 24px; /* Center icon vertically */
+    text-align: center;
+    cursor: pointer; /* Explicit cursor for button */
+    transition: background-color 0.2s ease;
+    color: #555;
+    padding: 0;
+    z-index: 5; /* Ensure button is clickable above card content */
+}
+
+.edit-card-btn:hover {
+    background: #ddd;
+    color: #000;
+}
+
+
+/* Drag and Drop Styling */
+.kanban-card.dragging {
+    opacity: 0.4;
+    transform: rotate(2deg);
+    cursor: grabbing !important; /* Override other cursors */
+}
+
+.cards.drag-over {
+    background-color: #d4edda; /* Highlight drop zone */
+    border: 2px dashed #5cb85c;
+}
+
+/* Modal Styles (Common) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+    padding-top: 50px; /* Space from top */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto; /* Centered */
+    padding: 25px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 650px; /* Maximum width */
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    margin-bottom: 50px; /* Space at bottom */
+}
+
+.close-btn {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1; /* Ensure consistent positioning */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+}
+
+/* Form Styles (Add/Edit Modals) */
+.modal form label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #444;
+}
+
+.modal form input[type="text"],
+.modal form textarea,
+.modal form select {
+    width: 100%;
+    padding: 9px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding in width */
+    font-size: 0.95em;
+}
+
+.modal form textarea {
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 60px;
+}
+
+.modal form button[type="submit"] {
+    background-color: #5cb85c;
+    margin-top: 15px;
+    width: auto; /* Don't force full width */
+    padding: 10px 20px;
+    float: right; /* Align button to the right */
+}
+.modal form button[type="submit"]:hover {
+    background-color: #4cae4c;
+}
+
+/* View Modal Specific Styles */
+#viewCardContent {
+    line-height: 1.7;
+    color: #333;
+}
+#viewCardContent h3 { /* Title in View */
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: #0056b3;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+#viewCardContent .detail-label {
+    font-weight: bold;
+    color: #555;
+    margin-top: 10px;
+    display: block; /* Ensure label is on its own line */
+}
+#viewCardContent .detail-value {
+    margin-left: 5px;
+    margin-bottom: 8px;
+    display: block; /* Ensure value is below label */
+    white-space: pre-wrap; /* Wrap long text */
+    word-wrap: break-word;
+    font-size: 0.95em;
+}
+#viewCardContent pre.detail-value { /* Specific styling for preformatted text */
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 0.9em;
+    max-height: 200px; /* Limit height */
+    overflow-y: auto; /* Add scroll if needed */
+}
+#viewCardContent hr {
+    border: 0;
+    height: 1px;
+    background-color: #eee;
+    margin: 15px 0;
+}

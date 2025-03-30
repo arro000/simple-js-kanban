@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Board Avanzato</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header-controls">
+            <h1>Kanban Board</h1>
+            <div class="header-buttons">
+                <button id="sortPriorityBtn" title="Ordina per Priorità (in ogni colonna)">Ordina Priorità</button>
+                <button id="sortIdBtn" title="Ordina per ID (in ogni colonna)">Ordina ID</button>
+                <button id="addCardBtnGlobal" title="Aggiungi Nuova Card a ToDo">+ Aggiungi Card</button>
+                <button id="toggleImportExportBtn" title="Mostra/Nascondi Import/Export">⇅ I/O</button>
+            </div>
+        </div>
+
+        <div class="controls collapsible collapsed">
+            <div class="io-section">
+                <h2>Importa JSON</h2>
+                <textarea id="jsonInput" rows="8" placeholder="Incolla qui il tuo JSON array..."></textarea>
+                <button id="importBtn">Importa Cards (Sovrascrive)</button>
+            </div>
+
+            <div class="io-section">
+                <h2>Esporta JSON</h2>
+                <button id="exportBtn">Esporta Stato Attuale</button>
+                <textarea id="jsonOutput" rows="8" readonly placeholder="Lo stato attuale del board apparirà qui..."></textarea>
+            </div>
+        </div>
+
+        <div class="kanban-board">
+            <div class="kanban-column" id="todo">
+                <h2>To Do</h2>
+                <div class="cards" data-column-id="todo">
+                    <!-- Le card verranno caricate qui -->
+                </div>
+            </div>
+            <div class="kanban-column" id="in-progress">
+                <h2>In Progress</h2>
+                <div class="cards" data-column-id="in-progress">
+                    <!-- Le card verranno caricate qui -->
+                </div>
+            </div>
+            <div class="kanban-column" id="done">
+                <h2>Done</h2>
+                <div class="cards" data-column-id="done">
+                    <!-- Le card verranno caricate qui -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Card Modal -->
+    <div id="addCardModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <h2>Aggiungi Nuova Card</h2>
+            <form id="addForm">
+                <!-- No ID field here, it will be generated -->
+                <label for="addTitle">Title:</label>
+                <input type="text" id="addTitle" required>
+
+                <label for="addDescription">Description:</label>
+                <textarea id="addDescription" rows="4"></textarea>
+
+                <label for="addPriority">Priority:</label>
+                <select id="addPriority">
+                    <option value="Media" selected>Media</option>
+                    <option value="Critica">Critica</option>
+                    <option value="Alta">Alta</option>
+                    <option value="Bassa">Bassa</option>
+                </select>
+
+                <label for="addEffort">Effort:</label>
+                <select id="addEffort">
+                    <option value="Medium" selected>Medium</option>
+                    <option value="Small">Small</option>
+                    <option value="Large">Large</option>
+                    <option value="X-Large">X-Large</option>
+                </select>
+
+                <label for="addAcceptance">Acceptance Criteria:</label>
+                <textarea id="addAcceptance" rows="3"></textarea>
+
+                <label for="addCategory">Category:</label>
+                <input type="text" id="addCategory">
+
+                <label for="addTechnical">Technical Notes:</label>
+                <textarea id="addTechnical" rows="3"></textarea>
+
+                <button type="submit">Aggiungi Card</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <h2>Modifica Card</h2>
+            <form id="editForm">
+                <input type="hidden" id="editCardId">
+                <label for="editTitle">Title:</label>
+                <input type="text" id="editTitle" required>
+
+                <label for="editDescription">Description:</label>
+                <textarea id="editDescription" rows="4"></textarea>
+
+                <label for="editPriority">Priority:</label>
+                <select id="editPriority">
+                    <option value="Critica">Critica</option>
+                    <option value="Alta">Alta</option>
+                    <option value="Media">Media</option>
+                    <option value="Bassa">Bassa</option>
+                </select>
+
+                <label for="editEffort">Effort:</label>
+                <select id="editEffort">
+                    <option value="Small">Small</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Large">Large</option>
+                    <option value="X-Large">X-Large</option>
+                </select>
+
+                <label for="editAcceptance">Acceptance Criteria:</label>
+                <textarea id="editAcceptance" rows="3"></textarea>
+
+                <label for="editCategory">Category:</label>
+                <input type="text" id="editCategory">
+
+                <label for="editTechnical">Technical Notes:</label>
+                <textarea id="editTechnical" rows="3"></textarea>
+
+                <button type="submit">Salva Modifiche</button>
+            </form>
+        </div>
+    </div>
+
+     <!-- View Card Modal -->
+     <div id="viewModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <h2>Dettaglio Card</h2>
+            <div id="viewCardContent">
+                <!-- Card details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
