@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             clearBoard();
             originalCardData = {};
-            cardsDataArray.forEach(cardData => addCardInternal(cardData, 'todo', false)); // Add to 'todo', don't save yet
+            cardsDataArray.forEach(cardData => addCardInternal(cardData, cardData.status ?? 'todo', false)); // Add to 'todo', don't save yet
             saveBoardState(); // Save once after all imports
             jsonInput.value = '';
             jsonOutput.value = '';
